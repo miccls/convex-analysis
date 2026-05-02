@@ -1,0 +1,98 @@
+\documentclass{amsart}
+\usepackage{amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{bbm}
+\usepackage{enumitem}
+\usepackage{graphicx}             % needed to include these graphics
+%\graphicspath{{./Pictures/}}      % only in case you want to keep the pictures in a separate
+                                  % subdirectory; also see the appropriate line below
+\usepackage{xparse}
+\usepackage{etoolbox} 
+
+\usepackage[style=numeric, backend=biber]{biblatex} 
+\addbibresource{ref.bib} 
+
+\DeclareMathAlphabet{\mathbbold}{U}{bbold}{m}{n}
+
+% Special command for partial derivatives
+
+% \d[order][function][variables]
+\NewDocumentCommand{\pd}{O{} O{} O{}}{%
+  \ensuremath{%
+    \IfNoValueTF{#1}{% -------- no order
+      \IfNoValueTF{#2}{%
+        \partial % just \d
+      }{%
+        \IfNoValueTF{#3}{%
+          \partial #2 % \d[f]
+        }{%
+          \frac{\partial #2}{\partial #3} % \d[f][x]
+        }%
+      }%
+    }{% -------- order given
+      \IfNoValueTF{#2}{%
+        \partial^{#1} % \d[2]
+      }{%
+        \IfNoValueTF{#3}{%
+          \partial^{#1} #2 % \d[2][f]
+        }{%
+          % build denominator for mixed partials
+          \def\varlist{}%
+          \renewcommand{\do}[1]{%
+            \ifx\varlist\empty
+              \def\varlist{\partial ##1}%
+            \else
+              \edef\varlist{\varlist \partial ##1}%
+            \fi
+          }%
+          \docsvlist{#3}%
+          \frac{\partial^{#1} #2}{\varlist} % e.g. \d[2][f][x,y]
+        }%
+      }%
+    }%
+  }% end ensuremath
+}
+
+                                  
+\theoremstyle{definition}
+\newtheorem{Thm}{Theorem}
+\newtheorem{Lma}{Lemma}
+\newtheorem{Prob}{Problem}
+\newtheorem*{Def}{Definition}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dlim}{\ds\lim}
+\newcommand{\bu}{$\bullet$}
+\newcommand{\sq}{$\square$}
+\newcommand{\lo}{$\lozenge$}
+\newcommand{\ci}{$\circ$}
+\newcommand{\by}{$\times\ $}
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+
+\setcounter{tocdepth}{3}
+
+
+\renewcommand{\labelenumi}{{\normalfont \arabic{enumi}.}}
+\begin{document}
+\title{Numerical Optimization - Book club}
+\author{Optimisation Quant Team}
+\date{\today}
+\maketitle
+
+\tableofcontents
+
+\input{chapters/fundamentals_of_unconstrained_optimization} % Chapter 2
+\input{chapters/line_search_methods.tex} % Chapter 3
+\input{chapters/theory_of_constrained_optimization} % Chapter 12
+\input{chapters/lp_the_simplex_method.tex} % Chapter 13
+\input{chapters/lp_interior_point_methods.tex} % Chapter 14
+
+\printbibliography
+\end{document}

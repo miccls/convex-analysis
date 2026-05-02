@@ -1,0 +1,44 @@
+{
+  "name": "LaTeX",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "bookclubber",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "James-Yu.latex-workshop"
+      ],
+      "settings": {
+        // Use latexmk to build the PDF
+        "latex-workshop.latex.tools": [
+          {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-file-line-error",
+              "-pdf",
+              "-outdir=latex-build",
+              "%DOC%"
+            ]
+          }
+        ],
+        // Set the build recipe
+        "latex-workshop.latex.recipes": [
+          {
+            "name": "latexmk",
+            "tools": [
+              "latexmk"
+            ]
+          }
+        ],
+        // Automatically build the project on save
+        "latex-workshop.latex.autoBuild.onSave.enabled": true,
+        // Show the PDF in a VS Code tab instead of an external viewer
+        "latex-workshop.view.pdf.viewer": "tab"
+      }
+    }
+  }
+}
