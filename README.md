@@ -11,13 +11,13 @@
 ---
 
 ## Phase 1: Geometry, Topology & Sets
-*Goal: Understand how inequalities and non-smooth boundaries behave, and try to master particularly critical topological concepts such as the "relative interior."*
+*Goal: Mathematical fundamentals for the rest of the studies. Covering convex sets and functions as well as separation theorems. Try to master particularly critical topological concepts such as the "relative interior."*
 
 - [ ] **Rockafellar | Sec 1, 2 & 3:** Affine sets and convex sets.
 - [ ] **Rockafellar | Sec 4:** The calculus of convex sets.
 - [ ] **Rockafellar | Sec 6:** Closure and Relative Interior. *(Crucial)*
 - [ ] **Rockafellar | Sec 7 & 8:** Convex functions and closed convex functions.
-- [ ] **Rockafellar | (early sections):** Separation theorems and supporting hyperplanes. *(Crucial)*
+- [ ] **Hiriart-Urruty | Convex sets:** Separation theorems and supporting hyperplanes. Particularly A.4 if the rest feels like it has been covered by Rockafellar. *(Crucial)*
 - [ ] **Hiriart-Urruty | Exercises:** Complete 3–5 exercises on affine hull, convex hull, and relative interior.
 - [ ] **Hiriart-Urruty | Exercises:** Do 2–3 exercises involving separation or supporting hyperplanes.
 - [ ] **Checkpoint:** Be able to state and interpret a separation theorem geometrically and in inequality form.
