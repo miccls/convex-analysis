@@ -3,7 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "remoteUser": "bookclubber",
+  "remoteUser": "convex-analyzer",
   "customizations": {
     "vscode": {
       "extensions": [
