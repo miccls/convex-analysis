@@ -6,7 +6,27 @@ Following this, some topological concepts are discussed such as the closure of c
 
 \subsection{Affine and Convex sets}
 
-\begin{Def}\cite[Affine set, p.~3]{rockafellar-1970a}
+The central object in section 1 of \cite{rockafellar-1970a} is the \textit{Affine set}.
+\begin{Def}[Affine set]\cite[p.~3]{rockafellar-1970a}
     A subset $M$ of $\R^n$ is called an affine set if $(1 - \lambda)x + \lambda y \in M$ for every $x \in M$, $y \in M$ and $\lambda \in \R$
     \label{def:affine-set}
 \end{Def}
+
+An exercise left for the reader is to prove that the \textit{affine hull} of an arbitrary subset $S \subset \R^n$ consists of all vectors of the form $\lambda_1 x_1 + \dots + \lambda_m x_m$, such that $x_i \in S$ and $\lambda_1 + \dots + \lambda_m = 1$.
+To prove this we begin with a definition.
+\begin{Def}[Affine hull]
+    The affine hull of an arbitrary subset $S \subset \R^n$ is the unique, smallest affine set that contains $S$. 
+    In other words, the affine hull is the intersection of all affine sets containing $S$.
+    We denote the affine hull of $S$ as $\operatorname{aff} S$.
+\end{Def}
+
+If we define the set $C$ as all linear combinations of points in the arbitrary subset $S \subset \R^n$ with coefficients summing to one
+\[
+    C = \left\{ \sum_{i = 1}^m \lambda_i x_i \> | \> m \geq 1, x_i \in S, \sum_{i = 1}^m \lambda_i = 1  \right\},
+\]
+
+the exercise above then boils down to proving the following lemma.
+\begin{Lma}
+    $\operatorname{aff} S = C$
+\end{Lma}
+\textit{Proof}. The proof is divided into two parts, showing $C \subseteq \operatorname{aff} S$ and showing $\operatorname{aff} S \subseteq C$, which together imply the statement of the lemma.
