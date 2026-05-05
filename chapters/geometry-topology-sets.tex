@@ -20,13 +20,101 @@ To prove this we begin with a definition.
     We denote the affine hull of $S$ as $\operatorname{aff} S$.
 \end{Def}
 
-If we define the set $C$ as all linear combinations of points in the arbitrary subset $S \subset \R^n$ with coefficients summing to one
+We begin by defining the set $C$ as all linear combinations of points in the arbitrary subset $S \subset \R^n$ with coefficients summing to one
 \[
     C = \left\{ \sum_{i = 1}^m \lambda_i x_i \> | \> m \geq 1, x_i \in S, \sum_{i = 1}^m \lambda_i = 1  \right\},
 \]
-
-the exercise above then boils down to proving the following lemma.
+as well as stating, and proving, the following lemma.
 \begin{Lma}
+  Let $M \subseteq \mathbb{R}^n$ be affine. If $x_1,\dots,x_m \in M$ and
+  $\lambda_1+\dots+\lambda_m = 1$, then
+  \[
+      \sum_{i=1}^m \lambda_i x_i \in M.
+  \]
+  \end{Lma}
+
+  \textit{Proof}. We argue by induction on $m$.
+
+  For $m=1$, the claim is immediate, since $\lambda_1 = 1$ and therefore
+  \[
+      \lambda_1 x_1 = x_1 \in M.
+  \]
+
+  For $m=2$, the claim follows directly from the definition of an affine set:
+  if $\lambda_1+\lambda_2=1$, then $\lambda_1 = 1-\lambda_2$, so
+  \[
+      \lambda_1 x_1 + \lambda_2 x_2
+      =
+      (1-\lambda_2)x_1 + \lambda_2 x_2
+      \in M.
+  \]
+
+  Now assume the result holds for affine combinations of $m-1$ points, and
+  let
+  \[
+      \sum_{i=1}^m \lambda_i x_i
+  \]
+  be an affine combination of $m$ points in $M$.
+
+  Since $m \geq 2$, at least one coefficient is different from $1$.
+  After relabeling if necessary, assume $\lambda_m \neq 1$. Then
+  \[
+      \sum_{i=1}^m \lambda_i x_i
+      =
+      (1-\lambda_m)
+      \left(
+          \sum_{i=1}^{m-1}
+          \frac{\lambda_i}{1-\lambda_m}x_i
+      \right)
+      +
+      \lambda_m x_m.
+  \]
+  The coefficients inside the parentheses sum to
+  \[
+      \sum_{i=1}^{m-1}
+      \frac{\lambda_i}{1-\lambda_m}
+      =
+      \frac{1-\lambda_m}{1-\lambda_m}
+      =
+      1.
+  \]
+  Hence, by the induction hypothesis,
+  \[
+      \sum_{i=1}^{m-1}
+      \frac{\lambda_i}{1-\lambda_m}x_i
+      \in M.
+  \]
+  Since also $x_m \in M$ and $M$ is affine, their affine combination belongs
+  to $M$. Therefore
+  \[
+      \sum_{i=1}^m \lambda_i x_i \in M.
+  \]
+  This completes the induction. \hfill\sq
+
+With these bits in mind we are ready to prove what is stated in the book which we formulate as the following theorem.
+\begin{Thm}
     $\operatorname{aff} S = C$
-\end{Lma}
-\textit{Proof}. The proof is divided into two parts, showing $C \subseteq \operatorname{aff} S$ and showing $\operatorname{aff} S \subseteq C$, which together imply the statement of the lemma.
+\end{Thm}
+\textit{Proof}. The proof is divided into two parts, showing $C \subseteq \operatorname{aff} S$ and showing $\operatorname{aff} S \subseteq C$, which together imply the statement of the theorem.
+\begin{enumerate}
+    \item[Case $C \subseteq \operatorname{aff} S$: ] The lemma above implies any linear combination of points with coefficients summing to one is a valid affine combination. Thus, since the affine hull contains $S$, the elements of $C$ are affine combinations of elements in the affine hull and thus $C\subseteq \operatorname{aff}S$. 
+    \item[Case $\operatorname{aff} S \subseteq C$] It remains to show that $\operatorname{aff} S \subseteq C$.
+  Since $C$ contains $S$, it suffices to show that $C$ is affine. Indeed, then $C$ is one of the affine sets containing $S$, and since $\operatorname{aff} S$ is the smallest such set, we get $\operatorname{aff} S \subseteq C$.
+    Take two arbitrary points $x, y \in C$. These can be written as
+    \begin{align*}
+        x &= \sum_{i = 1}^{m_x} \lambda_i x_i, \quad\quad \sum_{i = 1}^{m_x} \lambda_i = 1\\
+        y &= \sum_{i = 1}^{m_y} \gamma_i y_i, \quad\quad \sum_{i = 1}^{m_y} \gamma_i = 1
+    \end{align*}
+    We form an affine combination of $x$ and $y$ to see if $C$ is closed under affine combinations,
+    \[
+        z = ax + (1 - a)y = \sum_{i = 1}^{m_x} a\lambda_i x_i + \sum_{i = 1}^{m_y} (1 - a) \gamma_i y_i 
+    \]
+    This is a linear combination of points in $S$ as $x_i, y_i \in S$ with coefficients $a\lambda_i$ and $(1-a)\gamma_i$.
+    To show this is in $C$ we only have to show all combinations sum to one.
+    \begin{align*}
+        1 &\overset{!}{=} \sum_{i = 1}^{m_x}a\lambda_i + \sum_{i = 1}^{m_y}(1-a)\gamma_i \\
+          &= a\sum_{i = 1}^{m_x}\lambda_i + (1 - a)\sum_{i = 1}^{m_y}\gamma_i\\
+          &= a + (1-a) = 1
+    \end{align*}
+    Thus $C$ is an affine set containing $S$ which implies $\operatorname{aff} S \subseteq C$ and the proof is complete. \hfill\sq
+\end{enumerate}
