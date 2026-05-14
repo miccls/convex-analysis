@@ -118,3 +118,65 @@ With these bits in mind we are ready to prove what is stated in the book which w
     \end{align*}
     Thus $C$ is an affine set containing $S$ which implies $\operatorname{aff} S \subseteq C$ and the proof is complete. \hfill\sq
 \end{enumerate}
+
+\subsection{Cones}
+
+A subset $K \subseteq \R^n$ is called a cone if it is closed under positive scalar multiplication, i.e. $\lambda x \in K$ if $\lambda > 0$ and $x \in K$.
+Naturally there is such a thing as a \textit{convex cone}.
+That is a cone which is also a convex set.
+When reading this at first, I thought cones were almost always convex and couldn't really imagine a cone which wasn't convex.
+The mental, geometrical image I had of a cone was of the ``world sheet'' swept out of an expanding circle emanating from the origin which is convex, no doubt.
+But it turns out, cones can look very different indeed, and the following example of a non-convex cone illuminates
+\[
+    K_{nc} = \{(x, 0)\> |\> x \geq 0\} \cup \{(0, y)\> |\> y \geq 0\} 
+\] 
+
+% Codex made some nice images
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}[t]{0.47\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.9, >=Latex, baseline=(current bounding box.north)]
+            \draw[->] (-0.2,0) -- (4.0,0) node[right] {$z$};
+            \draw[->] (0,-1.8) -- (0,1.8) node[above] {$r$};
+
+            \coordinate (O) at (0,0);
+            \coordinate (T) at (3.4,1.25);
+            \coordinate (B) at (3.4,-1.25);
+
+            \fill[blue!12] (O) -- (T) arc[start angle=90,end angle=270,x radius=0.35,y radius=1.25] -- cycle;
+            \draw[blue!65!black, thick] (O) -- (T);
+            \draw[blue!65!black, thick] (O) -- (B);
+            \draw[blue!65!black, thick] (3.4,0) ellipse [x radius=0.35, y radius=1.25];
+            \draw[blue!65!black, thin] (1.4,0) ellipse [x radius=0.14, y radius=0.52];
+            \draw[blue!65!black, thin] (2.35,0) ellipse [x radius=0.24, y radius=0.87];
+            \fill (O) circle (1.2pt) node[below left] {$0$};
+        \end{tikzpicture}
+        \par\vspace{1.2em}
+        \small My mental image of a cone.
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.47\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.9, >=Latex, baseline=(current bounding box.north)]
+            \draw[->] (-0.25,0) -- (3.6,0) node[right] {$x$};
+            \draw[->] (0,-0.25) -- (0,3.2) node[above] {$y$};
+            \draw[orange!80!black, very thick, ->] (0,0) -- (3.1,0);
+            \draw[orange!80!black, very thick, ->] (0,0) -- (0,2.8);
+            \fill (0,0) circle (1.2pt) node[below left] {$0$};
+            \fill[orange!80!black] (2,0) circle (1.8pt) node[below] {$(1,0)$};
+            \fill[orange!80!black] (0,2) circle (1.8pt) node[left] {$(0,1)$};
+            \draw[dashed] (2,0) -- (0,2);
+            \fill[red!70!black] (1,1) circle (2pt);
+            \node[red!70!black, anchor=west, fill=white, inner sep=1pt] at (1.15,0.78) {$(1/2,1/2)$};
+            \node[red!70!black, anchor=west, fill=white, inner sep=1pt] at (1.55,1.35) {$\notin K_{nc}$};
+        \end{tikzpicture}
+        \par\vspace{0.3em}
+        \small $K_{nc}$: Two rays, but not convex combinations between them
+    \end{minipage}
+    \caption{A familiar convex cone on the left, and the non-convex cone $K_{nc}$ on the right.}
+    \label{fig:non-convex-cone}
+\end{figure}
+
+It is definitely closed under positive scalar multiplication, but not under convex combinations. 
+For example $(1/2)((1, 0) + (0, 1)) = (1/2, 1/2) \notin K_{nc}$.
