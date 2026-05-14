@@ -13,7 +13,7 @@
 ## Phase 1: Geometry, Topology & Sets
 *Goal: Mathematical fundamentals for the rest of the studies. Covering convex sets and functions as well as separation theorems. Try to master particularly critical topological concepts such as the "relative interior."*
 
-- [ ] **Rockafellar | Sec 1, 2 & 3:** Affine sets and convex sets.
+- [ 1, 2 ] **Rockafellar | Sec 1, 2 & 3:** Affine sets and convex sets.
 - [ ] **Rockafellar | Sec 4:** The calculus of convex sets.
 - [ ] **Rockafellar | Sec 6:** Closure and Relative Interior. *(Crucial)*
 - [ ] **Rockafellar | Sec 7 & 8:** Convex functions and closed convex functions.
