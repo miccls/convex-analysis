@@ -1,0 +1,41 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.95, >=Latex]
+        \coordinate (A1) at (-3.0,-0.6);
+        \coordinate (B1) at (2.2,-0.6);
+        \coordinate (C1) at (3.1,0.35);
+        \coordinate (D1) at (-2.1,0.35);
+        \coordinate (A2) at (-2.3,1.0);
+        \coordinate (B2) at (2.9,1.0);
+        \coordinate (C2) at (3.8,1.95);
+        \coordinate (D2) at (-1.4,1.95);
+
+        \fill[blue!10] (A1) -- (B1) -- (C1) -- (D1) -- cycle;
+        \draw[blue!55!black, thick] (A1) -- (B1) -- (C1) -- (D1) -- cycle;
+        \node[blue!55!black, anchor=east] at (A1) {$P_1: a^T x=b_1$};
+
+        \fill[orange!14] (A2) -- (B2) -- (C2) -- (D2) -- cycle;
+        \draw[orange!75!black, thick] (A2) -- (B2) -- (C2) -- (D2) -- cycle;
+        \node[orange!75!black, anchor=west] at (C2) {$P_2: a^T x=b_2$};
+
+        \coordinate (X1) at (-0.35,-0.12);
+        \coordinate (X2) at (2.0,1.46);
+        \coordinate (Q) at (-0.35,1.46);
+        \coordinate (N) at (-0.35,2.45);
+
+        \fill (X1) circle (1.4pt) node[below left] {$x_1$};
+        \fill (X2) circle (1.4pt) node[above right] {$x_2$};
+        \fill (Q) circle (1.1pt);
+        \draw[red!70!black, very thick, ->] (X1) -- (X2)
+            node[midway, below right=1pt, yshift=3mm] {$x_2-x_1$};
+        \draw[blue!70!black, very thick, <->] (X1) -- (Q)
+            node[midway, left=3pt] {$d$};
+        \draw[dashed, red!70!black] (X2) -- (Q);
+        \draw[red!70!black] (-0.12,1.46) -- (-0.12,1.23) -- (-0.35,1.23);
+
+        \draw[->, thick, purple!70!black] (Q) -- (N)
+            node[above] {$a$};
+    \end{tikzpicture}
+    \caption{The distance as the projection of the difference between two points onto the vector plane normal $a$.}
+    \label{fig:parallel-plane-distance}
+\end{figure}

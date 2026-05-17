@@ -1,0 +1,28 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.0, >=Latex]
+        \fill[blue!10] (-3.6,-2.0) rectangle (0,2.0);
+        \fill[orange!10] (0,-2.0) rectangle (3.6,2.0);
+
+        \draw[thick, dashed] (0,-2.0) -- (0,2.0);
+        \draw[gray!70, thick] (-2.0,0) -- (2.0,0);
+
+        \coordinate (A) at (-2.0,0);
+        \coordinate (B) at (2.0,0);
+        \coordinate (M) at (0,0);
+        \coordinate (X) at (-1.15,1.0);
+
+        \fill[blue!65!black] (A) circle (2pt) node[below] {$a$};
+        \fill[orange!80!black] (B) circle (2pt) node[below] {$b$};
+        \fill (M) circle (1.4pt) node[below right] {$(a+b)/2$};
+        \fill[blue!65!black] (X) circle (1.8pt) node[above left] {$x$};
+
+        \draw[blue!65!black, thick] (X) -- (A);
+        \draw[orange!80!black, thick] (X) -- (B);
+
+        \draw[->, very thick, purple!70!black] (M) -- (-1.15,0)
+            node[midway, below] {$a-b$};
+    \end{tikzpicture}
+    \caption{The perpendicular bisector of the segment between $a$ and $b$ separates the points closer to $a$ from the points closer to $b$.}
+    \label{fig:voronoi-halfspace}
+\end{figure}
