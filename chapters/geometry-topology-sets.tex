@@ -4,6 +4,69 @@ This section covers the fundamental mathematical toolset that future material de
 To begin with, affine and convex sets, convex functions and separation theorems are covered.
 Following this, some topological concepts are discussed such as the closure of convex sets and functions, as well as the relative interior of a set.
 
+\subsection{Fundamentals of topology}
+
+% Useful in this section in particular
+\newcommand{\T}{\mathcal{T}}
+
+Before we dive into the main topics of convex analysis and optimization we should review some topology. 
+Considering my background in theoretical physics, this introduction may seem to be of a slightly different dialect than that of OR people or mathematicians. 
+My first contact with topology was when reading Mikio Nakaharas iconic textbook \textit{Geometry, Topology and Physics} \cite{Nakahara:2003nw} and much of what follows will be heavily inspired from that experience.
+
+To begin discussing topology we must first introduce the concept of a \textit{topological space}. 
+\begin{Def}[Topological space]
+    Let X be any set and $\T = \{U_i \mid i \in I \}$ denote a certain collection of subsets of X.
+    The pair $(X, \T)$ is a topological space if $\T$ satisfies the following requirements.
+    \begin{enumerate}[label=(\roman*)]
+        \item $\emptyset, X \in \T$
+        \item If $J$ is any (maybe infinite) subcollection of $I$, the family $\{U_j \mid j \in J\}$ satisfies $\cup_{j \in J} U_j \in \T$.
+        \item If $K$ is any \textit{finite} subcollection of $I$, the family ${U_k \mid k \in K}$ satisfies $\cap_{k \in K} U_k \in \T$.
+    \end{enumerate} 
+\end{Def}
+
+Sometimes $X$ alone is referred to as a topological space.
+The elements of $U_i$ of $\T$ are called \textit{open} sets and $\T$ is said to give a topology to X.
+To clarify this abstract definition we can look at some examples.
+
+\textit{Trivial topology}. Let $X$ be any set and take $\T = \{\emptyset, X\}$.
+This is a valid topology on $X$ and is called the trivial topology. 
+
+\textit{Discrete topology}. Let $X$ be any set and take $\T$ to be all subsets of $X$.
+This set is called the discrete topology.
+
+\textit{Usual topology}. Let $X = \mathbb{R}$ and take $\T$ to be the set of all open intervals $(a, b)$ and their unions.
+This topology is a good example of why we shouldn't require infinite intersections to be part of the topology since that, in the case of the usual topology, would reduce it to the discrete topology (i.e. lose structure).
+
+Another interesting topology is the \textit{metric topology}.
+If $X$ is endowed with a metric $d$, a valid topology can be defined on the space through $d$ by defining it to be the set of all open norm balls and their unions.
+The resulting topology is called the metric topology.
+
+Let us now define continous maps.
+\begin{Def}[Continuous map]
+    Let $X$ and $Y$ be topological spaces.
+    A map $f : X \to Y$ is called continuous if the preimage of an open set in $Y$ is open in $X$. 
+\end{Def}
+The preimage of a set $S$ under a map $f : X \to Y$ is the following set
+\[
+    f^{-1}(S) = \{x \in X \mid f(x) \in S\}
+\]
+Even though this definition may seem strange, it is consistent with our intuition of contiuous maps as the following example from \cite{Nakahara:2003nw} illustrates.
+Consider $f : \mathbb{R} \to \mathbb{R}$ defined by
+\[
+    f(x) = \begin{cases}
+        -x + 1 \quad x \leq 0\\
+        -x + \frac{1}{2} \quad x > 0
+    \end{cases}
+\]
+From calculus we conclude this function has a discontinuity in its graph at $x = 0$.
+Since the spaces $X$ and $Y$ are the real line, we work with the usual topology where open sets are open intervals. 
+Take the open interval $(3/4, 5/4) \subset Y$. 
+The preimage of this set under $f$ is $(-1/4, 0]$ which is not an open set, which in turn means $f$ is not a continuous map.
+Figure~\ref{fig:continuous-map-preimage-calculus} shows how this is the same obstruction as in the calculus definition: every two-sided neighborhood of $0$ contains positive points mapped near $1/2$, outside the chosen interval around $f(0)=1$.
+
+\input{figures/continuous-map-preimage-calculus.tex}
+
+In fact, it isn't difficult to show that this definition in terms of open sets is equivalent to the classic epsilon-delta definiton of continuity of maps from $\mathbb{R} \to \mathbb{R}$ equipped with the usual topology.
 \subsection{Affine and Convex sets}
 
 The central object in section 1 of \cite{rockafellar-1970a} is the \textit{Affine set}.
