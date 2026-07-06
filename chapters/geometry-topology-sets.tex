@@ -41,22 +41,24 @@ Another interesting topology is the \textit{metric topology}.
 If $X$ is endowed with a metric $d$, a valid topology can be defined on the space through $d$ by defining it to be the set of all open norm balls and their unions.
 The resulting topology is called the metric topology.
 
-Let us now define continous maps.
+\subsubsection{Continuity}
+
+For a map $f : X \to Y$, the preimage of $S \subseteq Y$ is
+\[
+  f^{-1}(S) = \{x \in X \mid f(x) \in S\}.
+\]
 \begin{Def}[Continuous map]
     Let $X$ and $Y$ be topological spaces.
     A map $f : X \to Y$ is called continuous if the preimage of an open set in $Y$ is open in $X$. 
 \end{Def}
-The preimage of a set $S$ under a map $f : X \to Y$ is the following set
-\[
-    f^{-1}(S) = \{x \in X \mid f(x) \in S\}
-\]
+
 Even though this definition may seem strange, it is consistent with our intuition of contiuous maps as the following example from \cite{Nakahara:2003nw} illustrates.
 Consider $f : \mathbb{R} \to \mathbb{R}$ defined by
 \[
     f(x) = \begin{cases}
         -x + 1 \quad x \leq 0\\
         -x + \frac{1}{2} \quad x > 0
-    \end{cases}
+    \end{cases}.
 \]
 From calculus we conclude this function has a discontinuity in its graph at $x = 0$.
 Since the spaces $X$ and $Y$ are the real line, we work with the usual topology where open sets are open intervals. 
@@ -66,7 +68,58 @@ Figure~\ref{fig:continuous-map-preimage-calculus} shows how this is the same obs
 
 \input{figures/continuous-map-preimage-calculus.tex}
 
-In fact, it isn't difficult to show that this definition in terms of open sets is equivalent to the classic epsilon-delta definiton of continuity of maps from $\mathbb{R} \to \mathbb{R}$ equipped with the usual topology.
+In fact, it isn't difficult to show that this definition in terms of open sets is equivalent to the classic epsilon-delta definition of continuity of maps from $\mathbb{R} \to \mathbb{R}$ equipped with the usual topology.
+Recall that the epsilon-delta definition says that $f$ is continuous at $x_0$ if for every $\varepsilon > 0$ there exists a $\delta > 0$ such that
+\[
+    |x - x_0| < \delta \implies |f(x) - f(x_0)| < \varepsilon.
+\]
+
+Assume first that $f$ is continuous in the epsilon-delta sense at every point, and let $V \subseteq \mathbb{R}$ be open.
+We want to show that $f^{-1}(V)$ is open.
+Take any $x_0 \in f^{-1}(V)$.
+Then $f(x_0) \in V$, and since $V$ is open there exists an $\varepsilon > 0$ such that
+\[
+    (f(x_0) - \varepsilon, f(x_0) + \varepsilon) \subseteq V.
+\]
+By epsilon-delta continuity at $x_0$, there exists a $\delta > 0$ such that
+\[
+    |x - x_0| < \delta \implies |f(x) - f(x_0)| < \varepsilon.
+\]
+Equivalently,
+\[
+    x \in (x_0 - \delta, x_0 + \delta)
+    \implies
+    f(x) \in (f(x_0) - \varepsilon, f(x_0) + \varepsilon) \subseteq V.
+\]
+Thus
+\[
+    (x_0 - \delta, x_0 + \delta) \subseteq f^{-1}(V).
+\]
+Every point of $f^{-1}(V)$ therefore has an open interval around it contained in $f^{-1}(V)$, so $f^{-1}(V)$ is open.
+
+Conversely, assume that the preimage of every open set under $f$ is open.
+Fix $x_0 \in \mathbb{R}$ and let $\varepsilon > 0$.
+The interval
+\[
+    V = (f(x_0) - \varepsilon, f(x_0) + \varepsilon)
+\]
+is open in $\mathbb{R}$, so $f^{-1}(V)$ is open by assumption.
+Also $x_0 \in f^{-1}(V)$.
+Since $f^{-1}(V)$ is open and contains $x_0$, there exists a $\delta > 0$ such that
+\[
+    (x_0 - \delta, x_0 + \delta) \subseteq f^{-1}(V).
+\]
+Hence
+\[
+    |x - x_0| < \delta
+    \implies
+    f(x) \in V
+    \implies
+    |f(x) - f(x_0)| < \varepsilon.
+\]
+This is exactly epsilon-delta continuity at $x_0$.
+Since $x_0$ was arbitrary, $f$ is continuous in the epsilon-delta sense on $\mathbb{R}$.
+
 \subsection{Affine and Convex sets}
 
 The central object in section 1 of \cite{rockafellar-1970a} is the \textit{Affine set}.
@@ -240,3 +293,69 @@ The description of the halfspace as sought in the question is
     = \{x | (b-a)^T x \leq -d\},
 \]
 with $c = b - a$, and $d$ as above.
+
+\subsubsection{CO: 2.33}
+\textbf{Define the monotone nonnegative cone as}
+\[
+    K_{\text{m}+} = \{x \in \mathbb{R}^n \mid x_1 \geq x_2 \geq \dots \geq x_n \geq 0 \}
+\]
+\textbf{i.e. all nonnegative vector with the components sorted in nonincreasing order.}
+\begin{enumerate}
+    \item[\textbf{(a)}] \textbf{Show that $K_{\text{m}+}$ is a proper cone}.
+    \item[\textbf{(b)}] \textbf{Find the dual cone $K_{m+}^*$} 
+\end{enumerate}
+
+Let us recall the definition of a proper cone.
+\begin{Def}[Proper cone]
+    A cone $K \subseteq \mathbb{R}^n$ is called a proper cone if it is
+    \begin{enumerate}[label=(\roman*)]
+        \item convex,
+        \item closed,
+        \item solid, meaning $\operatorname{int} K \neq \emptyset$,
+        \item pointed, meaning $K \cap (-K) = \{0\}$.
+    \end{enumerate}
+\end{Def}
+The pointedness condition says that $K$ contains no line through the origin.
+
+We show convexity by considering the individual components.
+Take two elements of the cone, $x, y \in K_{\text{m}+}$ and consider two components, $x_i \geq x_{i+1}$ and $y_i \geq y_{i+1}$.
+Take a convex combination
+\[
+    z_i = \lambda x_i + (1 - \lambda) y_i
+\]
+From the sortedness of elements of $K_{\text{m}+}$, we derive the following series of inequalities
+\begin{align*}
+    z_i &= \lambda x_i + (1 - \lambda) y_i \\
+        &\geq \lambda x_{i+1} + (1 - \lambda) y_{i + 1}\\
+        &= z_{i + 1}.
+\end{align*}
+Thus, $z_i \geq z_{i+1}$ and $\lambda x + (1-\lambda)y = z \in K_{\text{m}+}$.
+Now to show the cone is closed I propose two different ways. 
+One argument is arguably simpler and clearer (better) and the other illustrates a more general way of showing closedness of sets when a simple argument is not available as in this case.
+
+\textit{The simple argument.} The defining inequality can be viewed as the intersection of a set of halfplanes.
+We define the following family of halfspaces
+\[
+    H_i = \begin{cases}
+       \{x \in \mathbb{R}^n \mid x_1 \geq 0\} \quad \text{if $i = 0$} \\
+       \{x \in \mathbb{R}^n \mid x_i - x_{i - 1} \geq 0\} \quad \text{otherwise}
+    \end{cases}.
+\]
+Clearly, we have
+\[
+    K_{\text{m}+} = \bigcap_{i = 1}^n H_i.
+\]
+Thus, the cone is an intersection of closed spaces and is thus closed itself.
+
+\textit{The general argument.} To show this using a more general method, we could form a continuous map from the to-be-shown closed space to some suitable, closed, target set.
+Consider, for example, the map $f: \mathbb{R}^n \to \mathbb{R}^{n}$
+\[
+    f: x_i \mapsto x_i - x_{i-1}
+\]
+This maps $K_{\text{m}+}$ to the nonnegative orthant, a closed set. 
+Since the map $f$ is continuous, this means the preimage of the nonnegative orthant ($K_{\text{m}+}$) is closed as well.
+This type of reasoning may be overkill in this scenario, but in cases where it is not as easy to find a simpler argument it could prove useful.
+For example, if you were tasked to prove that the subset of all non invertible matrices in $\mathbb{R}^{n \times n}$ this more general argument is much more powerful.
+The defining property of a noninvertible matrix is that its determinant (a polynomial in the matrix coefficients, i.e. continuous) is 0.
+Thus, the preimage of 0 under the map $\operatorname{det}: \mathbb{R}^{n \times n} \to \mathbb{R}$ is the set of all noninvertible matrices.
+Obviously, 0 is closed in $\mathbb{R}$ and since the determinant is continuous, the set of all noninvertible matrices must be closed, too.
