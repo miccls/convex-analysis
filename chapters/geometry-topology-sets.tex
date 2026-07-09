@@ -299,12 +299,16 @@ with $c = b - a$, and $d$ as above.
 \[
     K_{\text{m}+} = \{x \in \mathbb{R}^n \mid x_1 \geq x_2 \geq \dots \geq x_n \geq 0 \}
 \]
-\textbf{i.e. all nonnegative vector with the components sorted in nonincreasing order.}
+\textbf{i.e. all nonnegative vectors with components sorted in nonincreasing order.}
 \begin{enumerate}
     \item[\textbf{(a)}] \textbf{Show that $K_{\text{m}+}$ is a proper cone}.
-    \item[\textbf{(b)}] \textbf{Find the dual cone $K_{m+}^*$} 
+    \item[\textbf{(b)}] \textbf{Find the dual cone $K_{\text{m}+}^*$}
 \end{enumerate}
 
+Let us begin with the first task.
+
+\begin{enumerate}
+    \item[(a)]
 Let us recall the definition of a proper cone.
 \begin{Def}[Proper cone]
     A cone $K \subseteq \mathbb{R}^n$ is called a proper cone if it is
@@ -315,11 +319,10 @@ Let us recall the definition of a proper cone.
         \item pointed, meaning $K \cap (-K) = \{0\}$.
     \end{enumerate}
 \end{Def}
-The pointedness condition says that $K$ contains no line through the origin.
 
 We show convexity by considering the individual components.
-Take two elements of the cone, $x, y \in K_{\text{m}+}$ and consider two components, $x_i \geq x_{i+1}$ and $y_i \geq y_{i+1}$.
-Take a convex combination
+Take two elements of the cone, $x, y \in K_{\text{m}+}$, and let $0 \leq \lambda \leq 1$.
+For $z = \lambda x + (1 - \lambda)y$, we have
 \[
     z_i = \lambda x_i + (1 - \lambda) y_i
 \]
@@ -329,33 +332,83 @@ From the sortedness of elements of $K_{\text{m}+}$, we derive the following seri
         &\geq \lambda x_{i+1} + (1 - \lambda) y_{i + 1}\\
         &= z_{i + 1}.
 \end{align*}
+Also, $z_n = \lambda x_n + (1-\lambda)y_n \geq 0$.
 Thus, $z_i \geq z_{i+1}$ and $\lambda x + (1-\lambda)y = z \in K_{\text{m}+}$.
-Now to show the cone is closed I propose two different ways. 
-One argument is arguably simpler and clearer (better) and the other illustrates a more general way of showing closedness of sets when a simple argument is not available as in this case.
 
-\textit{The simple argument.} The defining inequality can be viewed as the intersection of a set of halfplanes.
-We define the following family of halfspaces
+For closedness, here are two different arguments.
+The first is simpler, while the second illustrates a more general method for showing that a set is closed.
+
+\textit{The simple argument.} The defining inequalities can be viewed as the intersection of a set of halfspaces.
+We define the following family of closed halfspaces:
 \[
-    H_i = \begin{cases}
-       \{x \in \mathbb{R}^n \mid x_1 \geq 0\} \quad \text{if $i = 0$} \\
-       \{x \in \mathbb{R}^n \mid x_i - x_{i - 1} \geq 0\} \quad \text{otherwise}
-    \end{cases}.
+    H_i = \{x \in \mathbb{R}^n \mid x_i - x_{i + 1} \geq 0\},
+    \quad i = 1,\dots,n-1,
+    \qquad
+    H_n = \{x \in \mathbb{R}^n \mid x_n \geq 0\}.
 \]
 Clearly, we have
 \[
     K_{\text{m}+} = \bigcap_{i = 1}^n H_i.
 \]
-Thus, the cone is an intersection of closed spaces and is thus closed itself.
+Thus, the cone is a finite intersection of closed sets and is closed itself.
 
-\textit{The general argument.} To show this using a more general method, we could form a continuous map from the to-be-shown closed space to some suitable, closed, target set.
-Consider, for example, the map $f: \mathbb{R}^n \to \mathbb{R}^{n}$
+\textit{The general argument.} To show this using a more general method, we can form a continuous map on the ambient space whose preimage is $K_{\text{m}+}$.
+Consider the map $g: \mathbb{R}^n \to \mathbb{R}^{n}$ defined by
 \[
-    f: x_i \mapsto x_i - x_{i-1}
+    g(x) = (x_1 - x_2, x_2 - x_3, \dots, x_{n-1} - x_n, x_n).
 \]
-This maps $K_{\text{m}+}$ to the nonnegative orthant, a closed set. 
-Since the map $f$ is continuous, this means the preimage of the nonnegative orthant ($K_{\text{m}+}$) is closed as well.
+Then
+\[
+    K_{\text{m}+} = g^{-1}(\mathbb{R}^n_+).
+\]
+Since $g$ is continuous and $\mathbb{R}^n_+$ is closed, the preimage $K_{\text{m}+}$ is closed as well.
 This type of reasoning may be overkill in this scenario, but in cases where it is not as easy to find a simpler argument it could prove useful.
-For example, if you were tasked to prove that the subset of all non invertible matrices in $\mathbb{R}^{n \times n}$ this more general argument is much more powerful.
+For example, if you were tasked to prove that the subset of all noninvertible matrices in $\mathbb{R}^{n \times n}$ is closed, this more general argument is useful.
 The defining property of a noninvertible matrix is that its determinant (a polynomial in the matrix coefficients, i.e. continuous) is 0.
-Thus, the preimage of 0 under the map $\operatorname{det}: \mathbb{R}^{n \times n} \to \mathbb{R}$ is the set of all noninvertible matrices.
-Obviously, 0 is closed in $\mathbb{R}$ and since the determinant is continuous, the set of all noninvertible matrices must be closed, too.
+Thus, the preimage of $\{0\}$ under the map $\operatorname{det}: \mathbb{R}^{n \times n} \to \mathbb{R}$ is the set of all noninvertible matrices.
+The singleton $\{0\}$ is closed in $\mathbb{R}$ and since the determinant is continuous, the set of all noninvertible matrices must be closed, too.
+
+To show that $K_{\text{m}+}$ is solid, it is enough to give an example of a point in the interior.
+A point satisfying all defining inequalities strictly will lie in the interior, since sufficiently small perturbations preserve strict inequalities.
+As an explicit example, take the point $\bar{x}$ with components
+\[
+    \bar{x}_i = n + 1 - i.
+\]
+Then $\bar{x}_i > \bar{x}_{i + 1}$ for $i = 1,\dots,n-1$, and $\bar{x}_n = 1 > 0$.
+Hence $\bar{x} \in \operatorname{int} K_{\text{m}+}$, so the cone is solid.
+
+Finally, we show pointedness.
+If $x \in K_{\text{m}+} \cap (-K_{\text{m}+})$, then $x \in K_{\text{m}+}$ implies $x_i \geq 0$ for all $i$, while $-x \in K_{\text{m}+}$ implies $-x_i \geq 0$ for all $i$.
+Thus $x_i = 0$ for all $i$, so $x = 0$.
+Hence $K_{\text{m}+} \cap (-K_{\text{m}+}) = \{0\}$.
+
+\item[(b)] The dual cone is defined as
+\[
+    K^* = \{y \in \mathbb{R}^n \mid y^T x \geq 0, \> \forall x \in K\}.
+\]
+Thus, we have to find the set of vectors that have a nonnegative inner product with every element of $K_{\text{m}+}$.
+For $x \in K_{\text{m}+}$, define
+\[
+    u_i = x_i - x_{i+1}, \quad i = 1,\dots,n-1,
+    \qquad
+    u_n = x_n.
+\]
+Then $u \in \mathbb{R}^n_+$, and conversely every $u \in \mathbb{R}^n_+$ gives an element of $K_{\text{m}+}$ by setting
+\[
+    x_i = \sum_{j=i}^n u_j.
+\]
+Expanding the inner product using these variables gives
+\[
+    y^T x
+    =
+    u_1 y_1
+    + u_2(y_1 + y_2)
+    + \dots
+    + u_n(y_1 + \dots + y_n).
+\]
+Since $u$ can be any vector in $\mathbb{R}^n_+$, this expression is nonnegative for every $x \in K_{\text{m}+}$ if and only if each coefficient of $u_i$ is nonnegative.
+This means that the dual cone is
+\[
+    K_{\text{m}+}^* = \left\{y \in \mathbb{R}^n \; \middle|\; \sum_{i = 1}^k y_i \geq 0, \> \forall k \in \{1, \dots, n\}\right\}.
+\]
+\end{enumerate}
